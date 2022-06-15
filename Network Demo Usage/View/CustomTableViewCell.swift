@@ -9,8 +9,11 @@ import UIKit
 
 class CustomTableViewCell: UITableViewCell {
 
-    @IBOutlet var infoButton: UIButton!
-    @IBOutlet var circleButton: UIButton!
+    @IBOutlet var cellBackround: UIView!
+    @IBOutlet var circleView: UIView!
+    @IBOutlet var boldLabel: UILabel!
+    @IBOutlet var regularLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,11 +23,7 @@ class CustomTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
-        infoButton.tintColor = .lightGray
-        circleButton.layer.cornerRadius = circleButton.frame.width/2
-        circleButton.layer.masksToBounds = true
+        circleView.layer.cornerRadius = circleView.frame.width/2
         
     }
-    
 }
