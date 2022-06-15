@@ -13,8 +13,8 @@ class ViewController: UIViewController {
     didSet{
         tableView.delegate = self
         tableView.dataSource = self
-        let nib = UINib(nibName: "CustomTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "CustomTableViewCell")
+        let nib = UINib(nibName: String(describing: CustomTableViewCell.self), bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: String(describing: CustomTableViewCell.self))
         }
     }
     
@@ -50,20 +50,25 @@ extension ViewController: UITableViewDelegate{
 //MARK: Table View Data Source
 
 extension ViewController: UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        105
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         objects.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let object = objects[indexPath.row]
-      let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as?  CustomTableViewCell
-        cell?.infoButton.titleLabel?.text = object.name.capitalized
-        cell?.infoButton.subtitleLabel?.text = String(object.year)
-        cell?.circleButton.tintColor = UIColor(hex: "\(object.color)FF")
+      let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CustomTableViewCell.self), for: indexPath) as?  CustomTableViewCell
+                
+        cell?.boldLabel.text = object.name.capitalized
+        cell?.regularLabel.text = String(object.year)
+        cell?.circleView.backgroundColor = UIColor(hex: "\(object.color)FF")
+  
         return cell!
     }
-    
-    
 }
 
 extension UIColor {
